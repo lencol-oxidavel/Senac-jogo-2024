@@ -1,4 +1,26 @@
 from random import choice
+import tkinter as tk
+
+
+class Application(tk.Frame):
+    def __init__(self):
+        super().__init__(self, master=None)
+        self.master = master
+        self.pack()
+        self.create.widgets()
+
+
+    def create_widgets(self):
+        self.pa = tk.button(self)
+        self.pa[]
+
+        self.quit = tk.Button(self, text="QUIT", fg="red",
+                              command=self.master.destroy)
+        self.quit.pack(side="bottom")
+
+root = tk.Tk()
+app = Application(master=root)
+app.mainloop()
 
 
 def start():
