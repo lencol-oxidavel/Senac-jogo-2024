@@ -2,6 +2,7 @@ import tkinter as tk
 from random import choice
 from tkinter import messagebox
 
+
 # Função que inicia o jogo
 def start(jogador):
     # Dicionário de escolhas
@@ -10,7 +11,6 @@ def start(jogador):
     computador_escolha = choice(['pe', 'pa', 'te'])
 
     # Determina o resultado do jogo
-    resultado = ""
     if jogador_escolha == computador_escolha:
         resultado = 'Empate'
     elif (jogador_escolha == 'pe' and computador_escolha == 'te') or \
@@ -21,11 +21,14 @@ def start(jogador):
         resultado = 'Derrota'
 
     # Exibe o resultado em uma caixa de mensagem
-    messagebox.showinfo("Resultado", f"Você escolheu: {jogador}\nComputador escolheu: {computador_escolha}\n\n{resultado}")
+    messagebox.showinfo("Resultado Você escolheu: {}\nComputador escolheu: {}\n\n{}"
+                        .format(jogador, computador_escolha, resultado))
+
 
 # Função chamada ao clicar em um botão
 def clique_botao(jogador):
     start(jogador)
+
 
 # Cria a janela principal
 root = tk.Tk()
