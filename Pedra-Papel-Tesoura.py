@@ -1,25 +1,58 @@
+import tkinter as tk
 from random import choice
+from tkinter import messagebox
 
+# Função que inicia o jogo
+def start(jogador):
+    # Dicionário de escolhas
+    escolhas = {'Pedra': 'pe', 'Papel': 'pa', 'Tesoura': 'te'}
+    jogador_escolha = escolhas[jogador]
+    computador_escolha = choice(['pe', 'pa', 'te'])
 
-def start():
-    jogador = str(input("Selecione uma opção: 'pe' para pedra, 'pa' para papel e 'te' para tesoura: "))
-    # método choice do módulo random
-    computador = choice(['te', 'pa', 'pe'])
+    # Determina o resultado do jogo
+    resultado = ""
+    if jogador_escolha == computador_escolha:
+        resultado = 'Empate'
+    elif (jogador_escolha == 'pe' and computador_escolha == 'te') or \
+         (jogador_escolha == 'pa' and computador_escolha == 'pe') or \
+         (jogador_escolha == 'te' and computador_escolha == 'pa'):
+        resultado = 'Vitória'
+    else:
+        resultado = 'Derrota'
 
-    print('jogador: {}\ncomputador: {} '.format(jogador, computador))
+    # Exibe o resultado em uma caixa de mensagem
+    messagebox.showinfo("Resultado", f"Você escolheu: {jogador}\nComputador escolheu: {computador_escolha}\n\n{resultado}")
 
-    # se a escolha do jogoador for a mesma da maquina então é um empate
-    if jogador == computador:
-        return 'empate'
-    # pe > te, te > pa, pa > pe
-    # pedra vence tesoura, tesoura vence papel, papel vence pedra
-    elif (jogador == 'te' and computador == 'pa' or jogador == 'pe' and computador == 'te' or jogador == 'pa' and
-          computador == 'pe'):
-        return 'vitória'
+# Função chamada ao clicar em um botão
+def clique_botao(jogador):
+    start(jogador)
 
-    # se nenhuma das condições acima forem satisfeitas então só sobra a derrota
-    return 'Derrota'
+# Cria a janela principal
+root = tk.Tk()
+root.title("Pedra, Papel e Tesoura")
 
+# Define o tamanho da janela (largura x altura)
+largura_janela = 300
+altura_janela = 200
 
+# Calcula a posição para centralizar a janela
+largura_tela = root.winfo_screenwidth()
+altura_tela = root.winfo_screenheight()
+pos_x = (largura_tela // 2) - (largura_janela // 2)
+pos_y = (altura_tela // 2) - (altura_janela // 2)
 
-print(start())
+# Define a geometria da janela com a posição calculada
+root.geometry("{}x{}+{}+{}".format(largura_janela, altura_janela, pos_x, pos_y))
+
+# Cria os botões
+botao_pedra = tk.Button(root, text="Pedra", command=lambda: clique_botao("Pedra"))
+botao_papel = tk.Button(root, text="Papel", command=lambda: clique_botao("Papel"))
+botao_tesoura = tk.Button(root, text="Tesoura", command=lambda: clique_botao("Tesoura"))
+
+# Posiciona os botões na janela
+botao_pedra.pack(side=tk.LEFT, padx=10, pady=10)
+botao_papel.pack(side=tk.LEFT, padx=10, pady=10)
+botao_tesoura.pack(side=tk.LEFT, padx=10, pady=10)
+
+# Inicia o loop principal da interface gráfica
+root.mainloop()
