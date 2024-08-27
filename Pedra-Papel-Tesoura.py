@@ -21,7 +21,7 @@ def start(jogador):
         resultado = 'Derrota'
 
     # Exibe o resultado em uma caixa de mensagem
-    messagebox.showinfo("Resultado Você escolheu: {}\nComputador escolheu: {}\n\n{}"
+    messagebox.showinfo("Resultado", "Você escolheu: {}\nComputador escolheu: {}\n\n{}"
                         .format(jogador, computador_escolha, resultado))
 
 
